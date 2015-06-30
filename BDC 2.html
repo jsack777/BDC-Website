@@ -1,0 +1,152 @@
+<head>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>
+    function month_validation() {
+      var month = $("#month").val();
+      if(!month) {
+        $("#month_error").show();
+        return 0;
+      } else {
+        month = Number(month);
+        if(month < 1 || month > 12) {
+          $("#month_error").show();
+          return 0;
+        } else {
+          $("#month_error").hide();
+          return month;
+        }
+      }
+    }
+
+    function year_validation() {
+      var year = $("#year").val();
+      if(!year || (year.length != 4)) {
+        $("#year_error").show();
+        return 0;
+      } else {
+        $("#year_error").hide();
+        return Number(year);
+      }
+    }
+
+    function age_validation() {
+      var age = $("#age").val();
+      if(!age) {
+        $("#age_error").show();
+        return false;
+      } else {
+        $("#age_error").hide();
+        return true;
+      }
+    }
+
+    function date_validation() {
+      var month = month_validation();
+      var year = year_validation();
+      if(month < 1 || year < 1) {
+        return false;
+      } else {
+        var today = new Date();
+        var this_year = Number(today.getFullYear());
+        var this_month = Number(today.getMonth());
+        console.log(this_month);
+        if((year > this_year) || ((year == this_year) && (month > (this_month + 1)))) {
+          $("#future_error").show();
+          return false;
+        } else {
+          $("#future_error").hide();
+          return true;
+        }
+      }
+    }
+
+    function calculate_duration(month, year) {
+      var today = new Date();
+      var this_year = Number(today.getFullYear());
+      var this_month = Number(today.getMonth()) + 1;
+      var num_years = this_year - year;
+      var num_months = num_years * 12;
+      return num_months + this_month - month;
+    }
+
+    function no_studies() {
+      $("#no_study").show();
+    }
+
+    function display_eligible_studies(age, duration) {
+      
+      if((age > 17) && (age < 46) && (duration < 3)) {
+        $("#study_links").show();
+        $("#study1").show();
+      }
+      if((age > 11) && (age < 46) && (duration < 3)) {
+        $("#study_links").show();
+        $("#study2").show();
+      }
+      if((age > 17)  && (duration < 22)) {
+        $("#study_links").show();
+        $("#study3").show();
+      }
+      if((age > 17) && (age < 61) && (duration > 23)) {
+        $("#study_links").show();
+        $("#study4").show();
+      }
+      if(!$("#study_links").is(":visible")) {
+        no_studies();
+      }
+    }
+
+    function validate_and_show() {
+      if(!age_validation() || !date_validation()) {
+        return false;
+      } else {
+        var age = Number($("#age").val());
+        var month = Number($("#month").val());
+        var year = Number($("#year").val());
+        var duration = calculate_duration(month, year);
+        display_eligible_studies(age, duration);
+        $("#bdc_form").hide();
+        return true;
+      }
+    }
+  </script>
+
+</head>
+<body>
+    <form id="bdc_form" action="javascript(0);">
+  <p>
+    If you have Type 1 Diabetes and want to determine which research study might work for you, please answer the following:
+  </p><br>
+  <p>
+    1. What is your age?
+  </p>
+  <p>
+  <div id="age_error" style="color: darkred; display: none">Please enter your age</div>
+  <input id="age" type="text" size="5"><br>
+  Age (Years)
+  </p><br>
+  <p>
+    2. When were you diagnosed with T1D (month and year only)?
+  </p>
+  <p>
+  <div id="month_error" style="color: darkred; display: none">Please enter the numeric month between 1 and 12 inclusive, of your diagnosis<br></div>
+  <div id="year_error" style="color: darkred; display: none">Please enter the 4 digit year of your diagnosis<br></div>
+  <div id="future_error" style="color: darkred; display: none">That month/year combination is in the future. Please re-enter the month and year.<br></div>
+  <input id="month" type="text" size="4"> / <input id="year" type="text" size="6"><br>
+  Month / Year
+  </p><br>
+  <input type="button" value="Submit" onclick="validate_and_show();">
+</form>
+<div id="study_links" style="display: none">
+  You may be eligible for the following studies (click on the study link to see study details):<br>
+</div>
+<a id="study1" style="display: none" href="http://www.gleevec.org">Gleevec Study</a><br>
+<a id="study2" style="display: none" href="http://www.trialnet.org">ATG-GCSF Study (TrialNet #19)</a><br>
+<a id="study3" style="display: none" href="http://www.pfizer.com">Pfizer Study</a><br>
+<a id="study4" style="display: none" href="http://bydureon_page">Bydureon Study</a><br>
+<div id="no_study" style="display: none">
+  We are sorry. Based on the info you have provided, you do not appear to be eligible for any of our studies at this time. Please check back at a later time.<br>
+</div>
+
+    
+</body>
