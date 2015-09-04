@@ -80,29 +80,21 @@
         $("#study_links").show();
         $("#study1").show();
       }
-      if((age > 11) && (age < 46) && (duration < 3) && (diabetes == "t1d")) {
+      if((age > 1) && (age < 45) && (diabetes == "no_yesrel")) {
         $("#study_links").show();
-        $("#study2").show();
-      }
-      if((age > 17) && (age < 61) && (duration > 23) && (diabetes == "t1d")) {
-        $("#study_links").show();
-        $("#study4").show();
+        $("#study3").show();
       }
       if((age > 1) && (age < 45) && (diabetes == "no_yesrel")) {
         $("#study_links").show();
         $("#study5").show();
       }
-      if((age > 2) && (age < 45) && (diabetes == "no_yesrel")) {
-        $("#study_links").show();
-        $("#study6").show();
-      }
-      if((age > 7) && (age < 45) && (diabetes == "no_yesrel")) {
-        $("#study_links").show();
-        $("#study7").show();
-      }
       if((age > 5) && (age < 45) && (diabetes == "no_yesrel")) {
         $("#study_links").show();
         $("#study8").show();
+      }
+      if((age < 45)) {
+        $("#study_links").show();
+        $("#study9").show();
       }
       if(!$("#study_links").is(":visible")) {
         no_studies();
@@ -165,23 +157,17 @@
 <div id="study1" style="display: none">
   <a href="http://www.bdcresearch.org/gleevec">Gleevec Study</a><br>
 </div>
-<div id="study2" style="display: none">
-  <a href="http://www.bdcresearch.org/tn19">ATG-GCSF Study (TrialNet #19)</a><br>
-</div>
-<div id="study4" style="display: none">
-  <a href="http://www.bdcresearch.org/bydureon">Bydureon Study</a><br>
+<div id="study3" style="display: none">
+  <a href="http://www.bdcresearch.org/TN01-Monitoring">TrialNet Pathway to Prevention-Monitoring Study</a><br>
 </div>
 <div id="study5" style="display: none">
-  <a href="http://www.bdcresearch.org/TN01">TrialNet Pathway to Prevention Study</a><br>
-</div>
-<div id="study6" style="display: none">
-  <a href="http://www.bdcresearch.org/TN07">TrialNet Oral Insulin Study</a><br>
-</div>
-<div id="study7" style="display: none">
-  <a href="http://www.bdcresearch.org/TN10">TrialNet Anti-CD3 Study</a><br>
+  <a href="http://www.bdcresearch.org/TN01-Screening">TrialNet Pathway to Prevention-Screening Study</a><br>
 </div>
 <div id="study8" style="display: none">
   <a href="http://www.bdcresearch.org/TN18">TrialNet Abatacept Study</a><br>
+</div>
+<div id="study9" style="display: none">
+  <a href="http://www.bdcresearch.org/Twin">Twin Study (if twins in the family)</a><br>
 </div>
 <div id="no_study" style="display: none">
   We are sorry. Based on the information entered, you do not appear to be eligible for any of our studies at this time. Please check back later.<br>
